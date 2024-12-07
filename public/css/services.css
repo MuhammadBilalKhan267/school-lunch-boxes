@@ -1,0 +1,313 @@
+/* General styling for the services section */
+#services {
+    padding: 50px 20px;
+    background-color: #f8f9fa; /* Light background to contrast cards */
+}
+
+#services h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+/* Grid layout for service cards */
+#services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.service-card {
+    position: relative;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 450px;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 25px #4a3e70;
+}
+
+.service-img {
+    width: 100%;
+    min-height: 100px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.service-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.service-content h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.service-content p {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: #666;
+}
+/* Service form */
+#add-service-form {
+    background-color: #f8f9fa; 
+    border: 2px solid #e9ecef; 
+    border-radius: 10px; 
+    padding: 20px; 
+    max-width: 1200px; 
+    margin: 40px auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    gap: 15px; 
+
+}
+
+/* Input field styling */
+#add-service-form input[type="text"],
+#add-service-form input[type="url"] {
+    flex: 1; /* Grow inputs to fill available space */
+    padding: 10px 15px; /* Comfortable padding for input fields */
+    border: 2px solid #ced4da; /* Soft gray border */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 16px; /* Readable font size */
+    width: 120px;
+    background-color: #ffffff; /* White background */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+/* Larger description area styling */
+#add-service-form textarea {
+    flex: 2; /* Slightly larger flex value than inputs */
+    width: 300px;
+    padding: 10px 15px; /* Comfortable padding for input fields */
+    border: 2px solid #ced4da; /* Soft gray border */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 16px; /* Readable font size */
+    background-color: #ffffff; /* White background */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    height: 100px; /* Taller height for larger text area */
+    resize: vertical; /* Allow users to resize vertically */
+}
+
+/* Input hover and focus states */
+#add-service-form input[type="text"]:focus,
+#add-service-form input[type="url"]:focus,
+#add-service-form textarea:focus {
+    outline: none; /* Remove default outline */
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle blue shadow */
+}
+
+/* Button styling */
+.btn {
+    padding: 10px 20px; /* Comfortable button size */
+    background-color: #5e4b8b; /* Dark gray background */
+    color: #ffffff; /* White text */
+    border: 2px solid #5e4b8b; /* Match border with background */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 16px; /* Readable font size */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+/* Button hover and active states */
+#add-service-form button[type="submit"]:hover {
+    background-color: #4a3e70; /* Slightly lighter gray on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+#add-service-form button[type="submit"]:active {
+    background-color: #4a3e70; /* Darker gray on click */
+    transform: scale(1); /* Reset size */
+}
+
+
+
+/* Basic Popup Styling */
+
+
+
+.popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(100%, 100%); /* Start from the bottom-right corner */
+    background-color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    z-index: 1000;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 15px;
+    animation: moveToCenter 0.6s ease-out forwards; /* Smooth animation */
+}
+
+/* Show Popup */
+.popup:not(.hidden) {
+    display: block; /* Ensure it's visible when not hidden */
+}
+
+/* Hide Popup */
+.hidden {
+    display: none; /* Ensure hidden class works */
+}
+
+/* Content styling inside popup */
+.popup-content {
+    text-align: center;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+.popup h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+/* Style for the popup button */
+.popup button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: #5e4b8b; /* Greenish button color */
+    color: white;
+    font-size: 1em;
+    border: none;
+    border-radius: 50px; /* Rounded corners */
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect for the button */
+.popup button:hover {
+    background-color: #4a3e70;
+    transform: translateY(-2px); /* Slight elevation effect on hover */
+}
+
+/* Smooth Movement Animation */
+@keyframes moveToCenter {
+    0% {
+        opacity: 0;
+        transform: translate(100%, 100%); /* Start from bottom-right corner */
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%); /* End at center */
+    }
+}
+
+/* Optional - Close button or icon in the top-right corner */
+.popup .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.popup .close-btn:hover {
+    color: #333;
+}
+
+
+
+/* Dim background when popup is visible */
+body.dimmed::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Show details Button */
+
+.show-details-btn, .delete-btn {
+    margin-top: auto; /* Pushes the button to the bottom */
+    color: white;
+    width: 120px;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    align-self: center; /* Center-align the button horizontally */
+}
+
+.show-details-btn {
+    background-color: #5e4b8b;
+}
+
+.delete-btn{
+    background-color: red;
+    margin-top: -15px;
+    margin-bottom: 10px;
+}
+
+.show-details-btn:hover {
+    background-color: #4a3e70;
+}
+
+
+/* Responsive design for tablets and smaller screens */
+@media (max-width: 1024px) {
+    #services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #service-card .service-img {
+        height: 200px;
+    }
+}
+
+/* Responsive design for mobile screens */
+@media (max-width: 768px) {
+    #services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #service-card .service-img {
+        height: 180px;
+    }
+
+}
+@media (max-width: 1100px) {
+    #add-service-form {
+        flex-direction: column; /* Stack fields vertically on smaller screens */
+    }
+    #add-service-form input[type="text"],
+    #add-service-form textarea,
+    #add-service-form input[type="url"],
+    .btn {
+        flex: unset; /* Reset flex grow */
+        width: 100%; /* Full width for smaller screens */
+    }
+}
