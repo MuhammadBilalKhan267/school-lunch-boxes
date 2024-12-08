@@ -34,37 +34,72 @@
     <h2>Explore Our Services</h2>
     <div id="services-grid">
         @foreach ($services as $service)
-            <div class="service-card">
-                <img src="{{$service->imgUrl}}" alt="{{$service->name}}" class="service-img">
+            <div class="service-card" data-service-id="{{ $service->id }}">
+                <img src="{{ $service->imgUrl }}" alt="{{ $service->name }}" class="service-img">
                 <div class="service-content">
-                    <h3>{{$service->name}}</h3>
-                    <p class="short-desc" data-full-desc="{{$service->description}}">
+                    <h3>{{ $service->name }}</h3>
+                    <p class="short-desc" data-full-desc="{{ $service->description }}">
                         <!-- Truncated version will be filled by JS -->
                     </p>
                     <button class="show-details-btn">Show Details</button>
                 </div>
-                <form action="{{ route('services.destroy', $service->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="delete-btn">Delete</button>
-                </form>
+                @auth
+                    <div class="actions">
+                        <button class="edit-btn" data-id="{{ $service->id }}" data-name="{{ $service->name }}" data-description="{{ $service->description }}" data-img="{{ $service->imgUrl }}">
+                            Edit
+                        </button>
+                        <form action="{{ route('services.destroy', $service->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+
+                    </div>
+                @endauth
             </div>
         @endforeach
     </div>
+    @auth
         <form id="add-service-form">
-        @csrf
-        <label for="service-title">Service Title:</label>
-        <input type="text" id="service-title" required><br>
+            @csrf
+            <label for="service-title">Service Title:</label>
+            <input type="text" id="service-title" required><br>
 
-        <label for="service-desc">Service Description:</label>
-        <textarea id="service-desc" rows="3" required></textarea><br>
+            <label for="service-desc">Service Description:</label>
+            <textarea id="service-desc" rows="3" required></textarea><br>
 
-        <label for="service-img">Image URL:</label>
-        <input type="url" id="service-img" required><br>
+            <label for="service-img">Image URL:</label>
+            <input type="url" id="service-img" required><br>
 
-        <button type="submit" class="btn">Add Service</button>
-    </form>
+            <button type="submit" class="btn">Add Service</button>
+        </form>
+    @endauth
 </section>
+
+@auth
+    <!-- Edit Form Modal -->
+    <div id="edit-form-modal" class="hidden">
+        <form id="edit-service-form">
+            @csrf
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" id="edit-service-id">
+            <label for="edit-service-name">Name:</label>
+            <input type="text" id="edit-service-name" name="name" required>
+            <span id="edit-name-error" class="error"></span>
+
+            <label for="edit-service-description">Description:</label>
+            <textarea id="edit-service-description" name="description" rows="4" required></textarea>
+            <span id="edit-description-error" class="error"></span>
+
+            <label for="edit-service-img">Image URL:</label>
+            <input type="url" id="edit-service-img" name="imgUrl" required>
+            <span id="edit-img-error" class="error"></span>
+
+            <button type="submit">Save Changes</button>
+            <button type="button" id="cancel-edit-btn">Cancel</button>
+        </form>
+    </div>
+@endauth
 
 <!-- Popup Structure -->
 <div id="popup" class="popup hidden">
@@ -147,4 +182,5 @@
 @section('js')
 <script src="js/script.js"></script>
 <script src="js/alert.js"></script>
+<script src="js/edit.js"></script>
 @endsection

@@ -99,7 +99,6 @@ function populateSectionList(selectorId) {
 
   const bodyChildren = document.body.children;
   let reachedFooter = false;
-  console.log(Array.from(bodyChildren));
   Array.from(bodyChildren).forEach((child) => {
 
     if (!reachedFooter && child.id && isVisible(child) && child.id !== "widget") {

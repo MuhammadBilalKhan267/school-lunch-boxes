@@ -16,6 +16,19 @@
                 <li><a href="{{ route('pricing') }}">Pricing</a></li>
                 <li><a href="{{ route('order') }}">Order</a></li>
                 <li><a href="{{ route('home') }}#testimonials">Reviews</a></li>
+                @auth
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST" id="logout-form" style="display: none;">
+                            @csrf
+                        </form>
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                    </li>
+                @endauth
+                @guest
+                    <li><a href="{{ route('login') }}">Login</a></li>  
+                @endguest
             </ul>
         </div>
     </nav>

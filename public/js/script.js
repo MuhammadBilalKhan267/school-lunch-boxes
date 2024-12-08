@@ -58,30 +58,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
         async function sendData() {
             let responseData = null;
+        
             try {
                 const response = await fetch('/', {
                     method: 'POST',
+                    redirect: 'follow', // Automatically follow redirects
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     },
-                    body: JSON.stringify(serviceData)
+                    body: JSON.stringify(serviceData),
                 });
         
-                responseData = await response.json();
+                if (response.redirected) {
+                    alert("You are not logged in!");
+                    window.location.href = response.url;
+                    return;
+                }
         
-                if (responseData.success) {
-                    alert('Service added successfully!');
+                if (response.ok) {
+                    responseData = await response.json();
+        
+                    if (responseData.success) {
+                        alert('Service added successfully!');
+                    } else {
+                        alert('Error adding service!');
+                    }
                 } else {
-                    alert('Error adding service!');
+                    alert(`Server Error: ${response.status}`);
                 }
             } catch (error) {
                 console.error('Error:', error);
                 alert('An error occurred while adding the service.');
             }
         
-            return responseData; // Use responseData here
+            return responseData; // Return the final response data
         }
+        
         
         // Call the async function
         sendData().then(responseData => {

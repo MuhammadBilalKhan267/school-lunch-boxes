@@ -8,8 +8,12 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 
 Route::get('/', [ServicesController::class, 'get'])->name('home');
-Route::resource('services', ServicesController::class);
-Route::post('/', [ServicesController::class, 'store']);
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('services', ServicesController::class);
+    Route::post('/', [ServicesController::class, 'store'])->name('services.store');
+    Route::put('/{id}', [ServicesController::class, 'update'])->name('services.update');
+});
 
 Route::get('/contact', [ContactController::class, 'showForm'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submitForm'])->name('contact.store');

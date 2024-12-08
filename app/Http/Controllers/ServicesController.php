@@ -31,6 +31,20 @@ class ServicesController extends Controller{
         return response()->json(['success' => true, 'service' => $service], 201);
     }
 
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'imgUrl' => 'required|url',
+        ]);
+
+        $service = Services::findOrFail($id);
+        $service->update($validated);
+
+        return response()->json(['success' => true, 'message' => 'Service updated successfully.']);
+    }
+
     public function destroy($id){
         $service = Services::find($id);
 
